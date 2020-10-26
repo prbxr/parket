@@ -187,13 +187,13 @@ function subscribe(emitter: Emitter, evt: string, fn: EventHandler) {
 
 export function model<
   S extends Obj,
-  K extends keyof S,
+  K extends keyof S = keyof S,
   A extends FnMap = {},
   V extends FnMap = {}
 >(
   name: string,
   { initial, actions, views }: ModelArgs<S, A, V>
-): (obj?: object | undefined) => S & A & V & Model<S> {
+): (obj?: S | undefined) => S & A & V & Model<S> {
   if (typeof initial !== 'function') {
     throw new Error(
       'You have to supply a function that returns the initial state'
